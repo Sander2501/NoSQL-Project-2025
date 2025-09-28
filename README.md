@@ -7,6 +7,6 @@ Het systeem maakt gebruik van een **Servicecatalogus**, **SLA’s**, en een **CM
 
 ## Team
 Dit werk is uitgevoerd door:
-- **Sander Meijer**  
-- **Tieko Krijgsman**  
-- **Delano Simaela**
+- **Sander Meijer** 731941  
+- **Tieko Krijgsman** 731867 
+- **Delano Simaela** 733923
