@@ -9,6 +9,7 @@ namespace NoSQL_Project.Controllers
         private readonly ILogger<HomeController> _logger;
 
         //TEST
+        //TEST2
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
