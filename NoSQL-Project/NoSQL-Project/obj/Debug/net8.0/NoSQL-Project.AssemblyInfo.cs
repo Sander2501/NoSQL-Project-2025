@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NoSQL-Project")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+891e200fa0d1c6dc8858b6c15c35b3d84fa01c29")]
 [assembly: System.Reflection.AssemblyProductAttribute("NoSQL-Project")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NoSQL-Project")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
