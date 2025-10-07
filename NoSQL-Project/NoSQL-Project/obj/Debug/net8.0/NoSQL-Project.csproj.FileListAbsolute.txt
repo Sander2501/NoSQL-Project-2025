@@ -33,3 +33,13 @@ C:\Users\731941\Source\Repos\NoSQL-Project-2025\NoSQL-Project\NoSQL-Project\obj\
 C:\Users\731941\Source\Repos\NoSQL-Project-2025\NoSQL-Project\NoSQL-Project\obj\Debug\net8.0\NoSQL-Project.pdb
 C:\Users\731941\Source\Repos\NoSQL-Project-2025\NoSQL-Project\NoSQL-Project\obj\Debug\net8.0\NoSQL-Project.genruntimeconfig.cache
 C:\Users\731941\Source\Repos\NoSQL-Project-2025\NoSQL-Project\NoSQL-Project\obj\Debug\net8.0\ref\NoSQL-Project.dll
+C:\Users\731941\Source\Repos\NoSQL-Project-2025\NoSQL-Project\NoSQL-Project\bin\Debug\net8.0\DnsClient.dll
+C:\Users\731941\Source\Repos\NoSQL-Project-2025\NoSQL-Project\NoSQL-Project\bin\Debug\net8.0\DotNetEnv.dll
+C:\Users\731941\Source\Repos\NoSQL-Project-2025\NoSQL-Project\NoSQL-Project\bin\Debug\net8.0\MongoDB.Bson.dll
+C:\Users\731941\Source\Repos\NoSQL-Project-2025\NoSQL-Project\NoSQL-Project\bin\Debug\net8.0\MongoDB.Driver.dll
+C:\Users\731941\Source\Repos\NoSQL-Project-2025\NoSQL-Project\NoSQL-Project\bin\Debug\net8.0\SharpCompress.dll
+C:\Users\731941\Source\Repos\NoSQL-Project-2025\NoSQL-Project\NoSQL-Project\bin\Debug\net8.0\Snappier.dll
+C:\Users\731941\Source\Repos\NoSQL-Project-2025\NoSQL-Project\NoSQL-Project\bin\Debug\net8.0\Sprache.dll
+C:\Users\731941\Source\Repos\NoSQL-Project-2025\NoSQL-Project\NoSQL-Project\bin\Debug\net8.0\ZstdSharp.dll
+C:\Users\731941\Source\Repos\NoSQL-Project-2025\NoSQL-Project\NoSQL-Project\obj\Debug\net8.0\NoSQL-Project.csproj.AssemblyReference.cache
+C:\Users\731941\Source\Repos\NoSQL-Project-2025\NoSQL-Project\NoSQL-Project\obj\Debug\net8.0\NoSQL-Pr.E2D327A0.Up2Date
