@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\731941\\source\\repos\\NoSQL-Project\\NoSQL-Project\\NoSQL-Project.csproj": {}
+    "C:\\Users\\731941\\Source\\Repos\\NoSQL-Project-2025\\NoSQL-Project\\NoSQL-Project\\NoSQL-Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\731941\\source\\repos\\NoSQL-Project\\NoSQL-Project\\NoSQL-Project.csproj": {
+    "C:\\Users\\731941\\Source\\Repos\\NoSQL-Project-2025\\NoSQL-Project\\NoSQL-Project\\NoSQL-Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\731941\\source\\repos\\NoSQL-Project\\NoSQL-Project\\NoSQL-Project.csproj",
+        "projectUniqueName": "C:\\Users\\731941\\Source\\Repos\\NoSQL-Project-2025\\NoSQL-Project\\NoSQL-Project\\NoSQL-Project.csproj",
         "projectName": "NoSQL-Project",
-        "projectPath": "C:\\Users\\731941\\source\\repos\\NoSQL-Project\\NoSQL-Project\\NoSQL-Project.csproj",
+        "projectPath": "C:\\Users\\731941\\Source\\Repos\\NoSQL-Project-2025\\NoSQL-Project\\NoSQL-Project\\NoSQL-Project.csproj",
         "packagesPath": "C:\\Users\\731941\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\731941\\source\\repos\\NoSQL-Project\\NoSQL-Project\\obj\\",
+        "outputPath": "C:\\Users\\731941\\Source\\Repos\\NoSQL-Project-2025\\NoSQL-Project\\NoSQL-Project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -49,6 +49,16 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "DotNetEnv": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[3.5.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
