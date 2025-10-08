@@ -55,5 +55,25 @@ namespace NoSQL_Project.Controllers
 
             return View(employeeViewModel);
         }
+        /// GET: /Employees/Delete/{id} - Show delete confirmation
+        public IActionResult Delete()
+        {
+            return View();
+        }
+
+        /// POST: /Employees/Delete/{id} - Handle employee deletion
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                ModelState.AddModelError(string.Empty, "Invalid employee ID.");
+                return View();
+            }
+            await _employeeService.DeleteEmployeeAsync(id);
+            TempData["SuccessMessage"] = "Employee deleted successfully!";
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

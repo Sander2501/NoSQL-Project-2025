@@ -3,10 +3,11 @@ using NoSQL_Project.Models;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using NoSQL_Project.Services.interfaces;
 
 namespace NoSQL_Project.Services
 {
-    public class EmployeeService
+    public class EmployeeService : IEmployeeService
     {
         private readonly IMongoCollection<Employee> _employees;
 
@@ -43,6 +44,20 @@ namespace NoSQL_Project.Services
         {
             FilterDefinition<Employee> filter = Builders<Employee>.Filter.Eq(employee => employee.Email, email);
             return await _employees.Find(filter).FirstOrDefaultAsync();
+        }
+
+        /// DELETE: Delete an employee by ID
+        public async Task DeleteEmployeeAsync(string id)
+        {
+            FilterDefinition<Employee> filter = Builders<Employee>.Filter.Eq(employee => employee.Id, id);
+            await _employees.DeleteOneAsync(filter);
+        }
+
+        /// UPDATE: Update an employee by ID
+        public async Task UpdateEmployeeAsync(string id, Employee updatedEmployee)
+        {
+            FilterDefinition<Employee> filter = Builders<Employee>.Filter.Eq(employee => employee.Id, id);
+            await _employees.ReplaceOneAsync(filter, updatedEmployee);
         }
     }
 }
