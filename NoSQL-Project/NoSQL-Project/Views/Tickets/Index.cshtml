@@ -1,0 +1,121 @@
+﻿@model IEnumerable<NoSQL_Project.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Tickets";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Incident Tickets</h1>
+        <a asp-action="Create" class="btn btn-primary">
+            Create New Ticket
+        </a>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>✓</strong> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Ticket ID</th>
+                        <th>Subject</th>
+                        <th>Owner</th>
+                        <th>Priority</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Created Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ticket in Model)
+                    {
+                        <tr>
+                            <td>
+                                <code>@(ticket.Id?.Substring(0, Math.Min(8, ticket.Id?.Length ?? 0)))</code>
+                            </td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@ticket.Id" class="text-decoration-none text-dark">
+                                <strong>@ticket.Subject</strong>
+                                </a>
+                            </td>
+                            <td>
+                                <small class="text-muted">@ticket.OwnerId?.Substring(0, 8)</small>
+                            </td>
+                            <td>
+                                @if (ticket.Priority == "High")
+                                {
+                                    <span class="badge bg-danger">@ticket.Priority</span>
+                                }
+                                else if (ticket.Priority == "Medium")
+                                {
+                                    <span class="badge bg-warning text-dark">@ticket.Priority</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-info text-dark">@ticket.Priority</span>
+                                }
+                            </td>
+                            <td>
+                                <span class="badge bg-secondary">@ticket.Type</span>
+                            </td>
+                            <td>
+                                @if (ticket.Status == "Open")
+                                {
+                                    <span class="badge bg-primary">@ticket.Status</span>
+                                }
+                                else if (ticket.Status == "Resolved")
+                                {
+                                    <span class="badge bg-success">@ticket.Status</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">@ticket.Status</span>
+                                }
+                            </td>
+                            <td>@ticket.CreatedAt.ToString("dd-MM-yyyy HH:mm")</td>
+                            <td>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a asp-action="Details" asp-route-id="@ticket.Id" 
+                                       class="btn btn-outline-info" title="View Details">
+                                        Details
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@ticket.Id" 
+                                       class="btn btn-outline-primary" title="Edit">
+                                        Edit
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@ticket.Id" 
+                                       class="btn btn-outline-danger" title="Delete">
+                                        Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="alert alert-info mt-3">
+            <strong>Total Tickets:</strong> @Model.Count()
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <h4 class="alert-heading">No tickets found</h4>
+            <p>There are currently no tickets in the system.</p>
+            <hr>
+            <a asp-action="Create" class="btn btn-primary">Create your first ticket</a>
+        </div>
+    }
+</div>

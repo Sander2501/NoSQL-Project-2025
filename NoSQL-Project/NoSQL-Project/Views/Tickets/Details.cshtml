@@ -1,0 +1,236 @@
+﻿@model NoSQL_Project.Models.Ticket
+
+@{
+    ViewData["Title"] = "Ticket Details";
+    var owner = ViewBag.Owner as NoSQL_Project.Models.Employee;
+    var assignedTo = ViewBag.AssignedTo as NoSQL_Project.Models.Employee;
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Ticket Details</h1>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+                Edit
+            </a>
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                Delete
+            </a>
+            <a asp-action="Index" class="btn btn-secondary">
+                Back to List
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">@Model.Subject</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Ticket ID:</strong><br>
+                            <code>@Model.Id</code>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Status:</strong><br>
+                            @if (Model.Status == "Open")
+                            {
+                                <span class="badge bg-primary fs-6">@Model.Status</span>
+                            }
+                            else if (Model.Status == "Resolved")
+                            {
+                                <span class="badge bg-success fs-6">@Model.Status</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary fs-6">@Model.Status</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Description:</strong>
+                        <p class="mt-2">@Model.Description</p>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <strong>Priority:</strong><br>
+                            @if (Model.Priority == "High")
+                            {
+                                <span class="badge bg-danger">@Model.Priority</span>
+                            }
+                            else if (Model.Priority == "Medium")
+                            {
+                                <span class="badge bg-warning text-dark">@Model.Priority</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-info text-dark">@Model.Priority</span>
+                            }
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Type:</strong><br>
+                            <span class="badge bg-secondary">@Model.Type</span>
+                        </div>
+                        <div class="col-md-4">
+                            <strong>Created:</strong><br>
+                            @Model.CreatedAt.ToString("dd-MM-yyyy HH:mm")
+                        </div>
+                    </div>
+
+                    @if (Model.UpdatedAt != Model.CreatedAt)
+                    {
+                        <div class="mb-3">
+                            <strong>Last Updated:</strong>
+                            @Model.UpdatedAt.ToString("dd-MM-yyyy HH:mm")
+                        </div>
+                    }
+
+                    @if (Model.ClosedAt.HasValue)
+                    {
+                        <div class="mb-3">
+                            <strong>Closed At:</strong>
+                            @Model.ClosedAt.Value.ToString("dd-MM-yyyy HH:mm")
+                        </div>
+                    }
+                </div>
+            </div>
+
+            @if (Model.Comments != null && Model.Comments.Any())
+            {
+                <div class="card mb-4">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">Comments (@Model.Comments.Count)</h5>
+                    </div>
+                    <div class="card-body">
+                        @foreach (var comment in Model.Comments)
+                        {
+                            <div class="border-bottom pb-3 mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <strong>Author ID: @comment.AuthorId.Substring(0, 8)</strong>
+                                    <small class="text-muted">@comment.CreatedAt.ToString("dd-MM-yyyy HH:mm")</small>
+                                </div>
+                                <p class="mt-2 mb-0">@comment.Comment</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    <strong>No comments yet</strong>
+                    <p class="mb-0">Be the first to add a comment to this ticket.</p>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">Reporter</h5>
+                </div>
+                <div class="card-body">
+                    @if (owner != null)
+                    {
+                        <div class="mb-2">
+                            <strong>Name:</strong><br>
+                            @owner.FullName
+                        </div>
+                        <div class="mb-2">
+                            <strong>Email:</strong><br>
+                            <a href="mailto:@owner.Email">@owner.Email</a>
+                        </div>
+                        @if (!string.IsNullOrEmpty(owner.Phone))
+                        {
+                            <div class="mb-2">
+                                <strong>Phone:</strong><br>
+                                @owner.Phone
+                            </div>
+                        }
+                        <div>
+                            <strong>Department:</strong><br>
+                            @owner.RoleId
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted mb-0">Owner information not available</p>
+                    }
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.AssignedToId))
+            {
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">Assigned To</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (assignedTo != null)
+                        {
+                            <div class="mb-2">
+                                <strong>Name:</strong><br>
+                                @assignedTo.FullName
+                            </div>
+                            <div class="mb-2">
+                                <strong>Email:</strong><br>
+                                <a href="mailto:@assignedTo.Email">@assignedTo.Email</a>
+                            </div>
+                            @if (!string.IsNullOrEmpty(assignedTo.Phone))
+                            {
+                                <div class="mb-2">
+                                    <strong>Phone:</strong><br>
+                                    @assignedTo.Phone
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p class="text-muted mb-0">Assigned employee information not available</p>
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning">
+                    <strong>Not Assigned</strong>
+                    <p class="mb-0">This ticket has not been assigned to a service desk employee yet.</p>
+                </div>
+            }
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary">
+                            Edit Ticket
+                        </a>
+                        @if (Model.Status == "Open")
+                        {
+                            <button type="button" class="btn btn-outline-success">
+                                Mark as Resolved
+                            </button>
+                        }
+                        @if (Model.Status != "Closed")
+                        {
+                            <button type="button" class="btn btn-outline-secondary">
+                                Close Ticket
+                            </button>
+                        }
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">
+                            Delete Ticket
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

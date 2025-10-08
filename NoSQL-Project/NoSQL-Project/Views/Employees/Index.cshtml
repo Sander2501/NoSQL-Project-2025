@@ -1,0 +1,76 @@
+﻿@model IEnumerable<NoSQL_Project.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Employees</h1>
+        <a asp-action="Create" class="btn btn-primary">Create New Employee</a>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>✓</strong> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var employee in Model)
+                    {
+                        <tr>
+                            <td><strong>@employee.FullName</strong></td>
+                            <td>@employee.Email</td>
+                            <td>
+                                @if (employee.RoleId == "ServiceDesk")
+                                {
+                                    <span class="badge bg-success">@employee.RoleId</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-primary">@employee.RoleId</span>
+                                }
+                            </td>
+                            <td>@employee.Phone</td>
+                            <td>
+                                @if (employee.Status == "Active")
+                                {
+                                    <span class="badge bg-success">@employee.Status</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">@employee.Status</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <h4 class="alert-heading">No employees found</h4>
+            <p>Add some employees to get started.</p>
+            <hr>
+            <a asp-action="Create" class="btn btn-primary">Create first employee</a>
+        </div>
+    }
+</div>
