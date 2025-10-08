@@ -41,7 +41,8 @@
                     {
                         <tr>
                             <td>
-                                <code>@(ticket.Id?.Substring(0, Math.Min(8, ticket.Id?.Length ?? 0)))</code>
+                                <code>@((ticket.Id as string)?.Substring(0, Math.Min(8, (ticket.Id as string)?.Length ?? 0)))</code>
+
                             </td>
                             <td>
                                 <a asp-action="Details" asp-route-id="@ticket.Id" class="text-decoration-none text-dark">

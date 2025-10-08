@@ -5,11 +5,6 @@ VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSQL-Project", "NoSQL-Project\NoSQL-Project.csproj", "{AD0AC470-E722-42FD-94AE-0910E9DF53C2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MySolution.sln", "MySolution.sln", "{0612B0E5-2CE1-44B8-BB4C-BF6A49AB6B70}"
-	ProjectSection(SolutionItems) = preProject
-		.env = .env
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoSQL_Project_Tests", "NoSQL_Project_Tests\NoSQL_Project_Tests.csproj", "{43B80ABA-E9FB-4091-8749-09D9A383840A}"
 EndProject
 Global

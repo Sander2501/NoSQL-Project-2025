@@ -3,10 +3,11 @@ using NoSQL_Project.Models;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using NoSQL_Project.Services.interfaces;
 
 namespace NoSQL_Project.Services
 {
-    public class TicketService
+    public class TicketService : ITicketService
     {
         private readonly IMongoCollection<Ticket> _tickets;
 
@@ -37,6 +38,20 @@ namespace NoSQL_Project.Services
         {
             FilterDefinition<Ticket> filter = Builders<Ticket>.Filter.Eq(ticket => ticket.Id, id);
             return await _tickets.Find(filter).FirstOrDefaultAsync();
+        }
+
+        /// DELETE: Delete a ticket by ID
+
+        public async Task DeleteTicketAsync(string id)
+        {
+            FilterDefinition<Ticket> filter = Builders<Ticket>.Filter.Eq(ticket => ticket.Id, id);
+            await _tickets.DeleteOneAsync(filter);
+        }
+        /// UPDATE: Update a ticket by ID
+        public async Task UpdateTicketAsync(string id, Ticket updatedTicket)
+        {
+            FilterDefinition<Ticket> filter = Builders<Ticket>.Filter.Eq(ticket => ticket.Id, id);
+            await _tickets.ReplaceOneAsync(filter, updatedTicket);
         }
     }
 }

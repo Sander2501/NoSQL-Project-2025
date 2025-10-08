@@ -1,6 +1,7 @@
 using MongoDB.Driver;
 using NoSQL_Project.Repositories.Interfaces;
 using NoSQL_Project.Repositories;
+using NoSQL_Project.Services;
 
 namespace NoSQL_Project
 {
@@ -13,7 +14,8 @@ namespace NoSQL_Project
 
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddScoped<IUserRepository, UserRepository>();
-
+            builder.Services.AddScoped<NoSQL_Project.Services.TicketService>();
+            builder.Services.AddScoped<EmployeeService>();
 
             // 1) Register MongoClient as a SINGLETON (one shared instance for the whole app)
             // WHY: MongoClient is thread-safe and internally manages a connection pool.
@@ -21,9 +23,9 @@ namespace NoSQL_Project
             builder.Services.AddSingleton<IMongoClient>(sp =>
             {
                 // Read the connection string from configuration (env var via .env)
-                var conn = builder.Configuration["Mongo:ConnectionString"];
+                var conn = builder.Configuration["MongoDBSettings:ConnectionString"];
                 if (string.IsNullOrWhiteSpace(conn))
-                    throw new InvalidOperationException("Mongo:ConnectionString is not configured. Did you set it in .env?");
+                    throw new InvalidOperationException("MongoDBSettings:ConnectionString is not configured. Did you set it in appsettings.json or .env?");
 
                 // Optional: tweak settings (timeouts, etc.)
                 var settings = MongoClientSettings.FromConnectionString(conn);
@@ -38,12 +40,13 @@ namespace NoSQL_Project
             {
                 var client = sp.GetRequiredService<IMongoClient>();
 
-                var dbName = builder.Configuration["Mongo:Database"]; // from appsettings.json
+                var dbName = builder.Configuration["MongoDBSettings:DatabaseName"]; // from appsettings.json
                 if (string.IsNullOrWhiteSpace(dbName))
-                    throw new InvalidOperationException("Mongo:Database is not configured in appsettings.json.");
+                    throw new InvalidOperationException("MongoDBSettings:DatabaseName is not configured in appsettings.json.");
 
                 return client.GetDatabase(dbName);
             });
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
